@@ -1,45 +1,77 @@
-$(document).ready(function){
-    $("#target-number").html(targetNumber);
-
-    // a number is randomly chosen by the computer as the score to achieve
-
-    var targetNumber = Math.random(Math.floor() * 121) +18;
-    $("#target-number").html(targetNumber);     
-
+$(document).ready(function() {
+     // a number is randomly chosen by the computer as the score to achieve
+    targetNumber = Math.floor(Math.random() * 121 +19);  
+    $("#target-number").text("Target Number is: " + targetNumber); 
+    console.log(targetNumber); 
     // the computer then generates a random number between 1 and 12 for each crystal
-    var img1 = Math.random(Math.floor() * 13) + 0;
-    var img2 = Math.random(Math.floor() * 13) + 0;
-    var img3 = Math.random(Math.floor() * 13) + 0;
-    var img4 = Math.random(Math.floor() * 13) + 0;
-
+    var img1 = Math.floor(Math.random() * 13 + 1);
+    var img2 = Math.floor(Math.random() * 13 + 1);
+    var img3 = Math.floor(Math.random() * 13 + 1);
+    var img4 = Math.floor(Math.random() * 13 + 1);
     // empty variables for our counts and link to the HTML
-    $("#target-number").text(targetNumber);
-    $("#users-current-score").text(currentScore);
     var userCurrentTotal = 0;
     var wins = 0;
     var losses = 0;
+    
+        $("#img1").on("click", function(){
+            userCurrentTotal = userCurrentTotal + img1;
+            $("#users-current-score").text("Current Total: " + userCurrentTotal);
+            checkOutcome();
+            console.log(userCurrentTotal);
+        })
 
-    // the player then has to guess choose a series of crystals to equal the target score
+        $("#img2").on("click", function(){
+            userCurrentTotal = userCurrentTotal + img2;
+            $("#users-current-score").text("Current Total: " + userCurrentTotal);
+            checkOutcome();
+            console.log(userCurrentTotal);
+        })
+        
+        $("#img3").on("click", function(){
+            userCurrentTotal = userCurrentTotal + img3;
+            $("#users-current-score").text("Current Total: " + userCurrentTotal);
+            checkOutcome();
+            console.log(userCurrentTotal);
+        })
+        
+        $("#img4").on("click", function(){
+            userCurrentTotal = userCurrentTotal + img4;
+            $("#users-current-score").text("Current Total: " + userCurrentTotal);
+            checkOutcome();
+            console.log(userCurrentTotal);
+        })
+        
+        function checkOutcome() {
+            if (userCurrentTotal > targetNumber){
+                losses++;
+                $("#losses").text("Losses " + losses);
+                reset();
+                console.log();
+            }
+            if (userCurrentTotal === targetNumber){
+                wins++;
+                $("#wins").text("Wins " + wins);
+                reset();
+                console.log();
+            }
+        }
 
-    $("#img1").on("click", function() {
-        userCurrentTotal = userCurrentTotal + img1;
-        console.log(userCurrentTotal);
-    }
+        
+        function reset(){
 
-    function wins() {
-        wins = wins + 1
-        $("#wins").text(wins)
-    }
+            targetNumber = Math.floor(Math.random() * 121 +19);  
+            $("#target-number").text("Target Number is: " + targetNumber); 
+            console.log(targetNumber); 
+            img1 = Math.floor(Math.random() * 13 + 1);
+            img2 = Math.floor(Math.random() * 13 + 1);
+            img3 = Math.floor(Math.random() * 13 + 1);
+            img4 = Math.floor(Math.random() * 13 + 1);
+                
+            userCurrentTotal = 0;
+            $("#users-current-score").text("Current Total: " + userCurrentTotal);
+            console.log();
+        }
+    
+});
 
-    function losses() {
-        losses = losses + 1
-        $("#losses").text(losses)
-    }
-
-    )
-
-    // if the player goes over the target score they lose the game
-
-    //if the player chooses the correct score based on the sum of the crystal clicks they win the game
-
-}
+// Move helper functions down here
